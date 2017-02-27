@@ -8,19 +8,29 @@ class MessageBox extends Component {
   }
 
   renderMessages() {
+    const msgStyle = {
+      background: '#eee',
+      padding: '10px',
+      fontFamily: 'arial',
+      fontSize: '14px',
+      borderTop: '1px solid darkgray',
+      overflow: 'hidden',
+    };
     const {messageLog} = this.props;
-    return messageLog.map(message => <div key={message.key}>{message.message}</div>);
+    return messageLog.map(message => <div style={msgStyle} key={message.key}>{message.message}</div>);
   }
 
   render() {
     const MessageBoxStyle = {
-      height: '100%',
       width: '100%',
-      background: 'white'
+      background: 'white',
+      display: 'flex',
+      flexDirection: 'column',
+      overflowY: 'auto',
     };
 
     return (
-      <div style={MessageBoxStyle} >
+      <div className="msg-wrap" style={MessageBoxStyle} >
         {this.renderMessages()}
       </div>
     );
