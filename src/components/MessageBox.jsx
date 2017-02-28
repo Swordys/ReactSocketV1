@@ -10,14 +10,26 @@ class MessageBox extends Component {
   renderMessages() {
     const msgStyle = {
       background: '#eee',
-      padding: '10px',
       fontFamily: 'arial',
       fontSize: '14px',
       borderTop: '1px solid darkgray',
       overflow: 'hidden',
+      flexShrink: '0',
+    };
+    const wrapperStyle = {
+      display: 'flex',
+      flexDirection: 'column',
+      padding: '10px',
     };
     const {messageLog} = this.props;
-    return messageLog.map(message => <div style={msgStyle} key={message.key}>{message.message}</div>);
+    return messageLog.map(message => <div style={msgStyle} key={message.key}>
+      <div style={wrapperStyle}>
+        <div style={{  fontWeight: 'bold', borderBottom: '1px solid gray', paddingBottom: '5px' }}>{message.nickname}</div>
+        <p style={{ paddingTop: '10px' }} >
+          {message.message}
+        </p>
+      </div>
+    </div>);
   }
 
   render() {

@@ -16,6 +16,11 @@ io.on('connection', socket => {
   socket.on('disconnect', () => {
     console.log('User disconnected');
   });
+
+  socket.on('user connected', nickname => {
+    io.emit('user connected', nickname);
+  });
+
   socket.on(`chat message`, message => {
     console.log(`New message: ${message}`);
     io.emit(`chat message`, message);

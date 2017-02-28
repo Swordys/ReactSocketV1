@@ -37,7 +37,7 @@ class Input extends Component {
 
     return (
       <form onSubmit={this.submitMeesage}>
-        <input style={inputStyle} type="text" />
+        <input placeholder="type here" style={inputStyle} type="text" />
       </form>
     );
   }
