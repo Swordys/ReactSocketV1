@@ -18,6 +18,7 @@ io.on('connection', socket => {
   });
 
   socket.on('user connected', nickname => {
+    console.log(nickname);
     io.emit('user connected', nickname);
   });
 

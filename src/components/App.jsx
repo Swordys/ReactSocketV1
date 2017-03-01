@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import io from 'socket.io-client';
+import { connect } from 'react-redux';
+import socket from '../constants/clientSocket.js';
+import { connectNickname } from '../actions/Actions.jsx';
 import MessageBox from './MessageBox.jsx';
 import Input from './Input.jsx';
 import ConnectedMessage from './ConnectedMessage.jsx';
-
-let socket = io('http://192.168.0.103:8000');
 
 
 class App extends Component {
@@ -17,38 +17,21 @@ class App extends Component {
       logged: false,
       lastConnected: '',
     };
-    this.MessageInput = this.MessageInput.bind(this);
     this.NicknameInput = this.NicknameInput.bind(this);
   }
 
-  componentWillMount() {
-    socket.on(`chat message`, message => {
-      this.setState(prevState => ({
-        messages: [...prevState.messages, message],
-      }));
-    });
-    socket.on(`user connected`, user => {
-      this.setState({
-        lastConnected: user,
-      });
-    });
-  }
 
   NicknameInput(e) {
     e.preventDefault();
+    const {connectNickname} = this.props;
     const nickname = e.target.lastChild.value;
     e.target.lastChild.value = '';
+    connectNickname(nickname);
     this.setState({
-      username: nickname,
       logged: true,
     });
-    socket.emit('user connected', nickname);
   }
 
-  MessageInput(message) {
-    message.nickname = this.state.username;
-    socket.emit('chat message', message);
-  }
 
   render() {
     const mainStyle = {
@@ -63,6 +46,7 @@ class App extends Component {
       position: 'relative',
     };
 
+    let Unchangable = false;
     const nickNameStyle = {
       position: 'absolute',
       top: 0,
@@ -77,9 +61,11 @@ class App extends Component {
       opacity: '1',
       zIndex: '3',
       transition: 'all 500ms ease-out',
+      userSelect: 'none',
     };
 
     if (this.state.logged) {
+      Unchangable = true;
       nickNameStyle.zIndex = '-1';
       nickNameStyle.opacity = '0';
       nickNameStyle.transform = 'translateY(-50px)';
@@ -104,6 +90,7 @@ class App extends Component {
                 fontFamily: 'arial'
               }} >nickname ?</h2>
             <input
+              readOnly={Unchangable}
               style={{
                 background: 'none',
                 border: 'none',
@@ -116,12 +103,22 @@ class App extends Component {
               type="text" />
           </form>
         </div>
-        <ConnectedMessage lastConnceted={this.state.lastConnected} />
-        <MessageBox messageLog={this.state.messages} />
-        <Input handleMessageInput={this.MessageInput} />
+        <ConnectedMessage />
+        <MessageBox />
+        <Input />
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  username: state.userName,
+});
+
+const mapDispatchToProps = dispatch => ({
+  connectNickname: (name) => {
+    dispatch(connectNickname(name));
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

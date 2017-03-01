@@ -1,10 +1,21 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import socket from '../constants/clientSocket';
 
 class MessageBox extends Component {
-
   constructor(props) {
     super(props);
     this.renderMessages = this.renderMessages.bind(this);
+    this.state = {
+      globalMessages: [],
+    };
+  }
+  componentWillMount() {
+    socket.on(`chat message`, message => {
+      this.setState(prevState => ({
+        globalMessages: [...prevState.globalMessages, message],
+      }));
+    });
   }
 
   renderMessages() {
@@ -21,10 +32,10 @@ class MessageBox extends Component {
       flexDirection: 'column',
       padding: '10px',
     };
-    const {messageLog} = this.props;
-    return messageLog.map(message => <div style={msgStyle} key={message.key}>
+    const {globalMessages} = this.state;
+    return globalMessages.map(message => <div style={msgStyle} key={message.key}>
       <div style={wrapperStyle}>
-        <div style={{  fontWeight: 'bold', borderBottom: '1px solid gray', paddingBottom: '5px' }}>{message.nickname}</div>
+        <div style={{ fontWeight: 'bold', borderBottom: '1px solid gray', paddingBottom: '5px' }}>{message.sender}</div>
         <p style={{ paddingTop: '10px' }} >
           {message.message}
         </p>
@@ -53,4 +64,8 @@ MessageBox.propTypes = {
   messageLog: PropTypes.array,
 };
 
-export default MessageBox;
+const mapStateToProps = state => ({
+  globalMessages: state.lastMessage,
+});
+
+export default connect(mapStateToProps)(MessageBox);

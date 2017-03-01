@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 import uuid from 'uuid';
+import { sendGlobalMessage } from '../actions/Actions.jsx';
 
 class Input extends Component {
   constructor(props) {
@@ -8,13 +10,12 @@ class Input extends Component {
   }
 
   submitMeesage(e) {
-    const {handleMessageInput} = this.props;
     e.preventDefault();
-
-    const message = e.target.firstChild.value;
-    if (message.length > 0) {
+    const { sendGlobal, userName } = this.props;
+    const message = { msg: e.target.firstChild.value, sender: userName };
+    if (message.msg.length > 0) {
       e.target.firstChild.value = '';
-      handleMessageInput({ message, key: uuid() });
+      sendGlobal(message);
     }
 
     // auto scroll to bottom
@@ -43,8 +44,14 @@ class Input extends Component {
   }
 }
 
-Input.propTypes = {
-  handleMessageInput: PropTypes.func.isRequired,
-};
 
-export default Input;
+const mapStateToProps = state => ({
+  userName: state.userName,
+});
+
+const mapDispatchToProps = dispatch => ({
+  sendGlobal: (message) => {
+    dispatch(sendGlobalMessage(message));
+  }
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Input);

@@ -1,13 +1,32 @@
 import React, { Component, PropTypes } from 'react';
+import socket from '../constants/clientSocket';
 /* eslint-disable no-unused-vars */
 import style from '../style/userConnected.css';
 /* eslint-enable no-unused-vars */
-let toggle = true;
 
 class ConnectedMessage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      lastConnceted: '',
+      toggle: true,
+    };
+  }
+
+  componentWillMount() {
+    socket.on(`user connected`, user => {
+      this.setState({
+        lastConnected: user,
+      });
+    });
+  }
+
   render() {
-    const {lastConnceted} = this.props;
-    let flash = '';
+    this.setState({
+      toggle: !this.state.toggle
+    });
+    const toggle = this.state.toggle;
+
     const MessageStyle = {
       background: 'black',
       color: 'white',
@@ -21,37 +40,23 @@ class ConnectedMessage extends Component {
       opacity: 0,
     };
 
-    () => {
-      this.setState({
-        last: lastConnceted,
-      });
-      this.setState(prev => ({
-        check: prev.last === lastConnceted ? true : false,
-      }));
-    };
-
-    if (lastConnceted) {
-      toggle = !toggle;
-      if (toggle) {
-        flash = 'conncted-wrap';
-        console.log('yas');
-      } else {
-        flash = 'conncted-wrap2';
-        console.log('yaz');
-      }
+    let flash = '';
+    if (toggle) {
+      flash = 'conncted-wrap';
+    } else {
+      flash = 'conncted-wrap2';
     }
 
     return (
       <div className={flash} style={MessageStyle}>
-        <span style={{ padding: '10px' }}>{lastConnceted} connceted</span>
+        <span style={{ padding: '10px' }}>{this.state.lastConnected} connceted</span>
       </div>
     );
   }
 }
 
-
 ConnectedMessage.propTypes = {
   lastConnceted: PropTypes.string,
-}
+};
 
 export default ConnectedMessage;
