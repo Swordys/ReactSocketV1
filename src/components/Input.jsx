@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import uuid from 'uuid';
 import { sendGlobalMessage } from '../actions/Actions.jsx';
 
 class Input extends Component {

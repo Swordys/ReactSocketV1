@@ -22,9 +22,9 @@ class ConnectedMessage extends Component {
   }
 
   render() {
-    this.setState({
+    (() => this.setState({
       toggle: !this.state.toggle
-    });
+    }))();
     const toggle = this.state.toggle;
 
     const MessageStyle = {

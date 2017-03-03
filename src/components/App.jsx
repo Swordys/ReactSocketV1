@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import socket from '../constants/clientSocket.js';
 import { connectNickname } from '../actions/Actions.jsx';
 import MessageBox from './MessageBox.jsx';
 import Input from './Input.jsx';
@@ -23,7 +22,7 @@ class App extends Component {
 
   NicknameInput(e) {
     e.preventDefault();
-    const {connectNickname} = this.props;
+    const { connectNickname } = this.props;
     const nickname = e.target.lastChild.value;
     e.target.lastChild.value = '';
     connectNickname(nickname);
@@ -110,6 +109,11 @@ class App extends Component {
     );
   }
 }
+
+
+App.propTypes = {
+  connectNickname: PropTypes.func,
+};
 
 const mapStateToProps = state => ({
   username: state.userName,

@@ -1,6 +1,6 @@
 import io from 'socket.io-client';
 import uuid from 'uuid';
-let socket = io('http://192.168.0.100:8000');
+import socket from '../constants/clientSocket';
 
 const connectNicknameSuccess = (name) => ({
   type: 'GET_NICKNAME_SUCCESS',
