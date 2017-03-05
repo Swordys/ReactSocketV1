@@ -16,19 +16,12 @@ class Input extends Component {
       e.target.firstChild.value = '';
       sendGlobal(message);
     }
-
-    // auto scroll to bottom
-    const msgWrap = document.querySelector('.trans-wrap');
-    const isScrolled = msgWrap.scrollHeight - msgWrap.clientHeight <= msgWrap.scrollTop + 1;
-    if (!isScrolled) {
-      msgWrap.scrollTop = msgWrap.scrollHeight - msgWrap.clientHeight;
-    }
   }
 
   render() {
     const inputStyle = {
       width: '100%',
-      padding: '10px',
+      padding: '1.5vh',
       border: '0',
       borderTop: '1px solid darkgray',
       boxSizing: 'border-box',

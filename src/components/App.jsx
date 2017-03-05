@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import styles from '../style/app.css';
 import { connectNickname } from '../actions/Actions.jsx';
 import MessageBox from './MessageBox.jsx';
 import Input from './Input.jsx';
@@ -72,7 +73,7 @@ class App extends Component {
     }
 
     return (
-      <div style={mainStyle}>
+      <div className="app-wrap">
         <div style={nickNameStyle}>
           <form
             onSubmit={this.NicknameInput}

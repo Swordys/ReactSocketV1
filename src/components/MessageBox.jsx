@@ -20,6 +20,14 @@ class MessageBox extends Component {
     });
   }
 
+
+  componentDidUpdate() {
+    const msgWrap = document.querySelector('.trans-wrap');
+    const isScrolledToBottom = msgWrap.scrollHeight - msgWrap.clientHeight <= msgWrap.scrollTop + 1;
+    if (!isScrolledToBottom) {
+      msgWrap.scrollTop = msgWrap.scrollHeight - msgWrap.clientHeight;
+    }
+  }
   renderMessages() {
     const msgStyle = {
       background: '#f6f6f6',
@@ -44,52 +52,33 @@ class MessageBox extends Component {
       alignSelf: 'flex-start',
     };
 
-    const wrapperStyle = {
-      display: 'flex',
-      flexDirection: 'column',
-      padding: '10px',
-    };
     const { globalMessages } = this.state;
     const { userName } = this.props;
 
     return globalMessages.map(function (message) {
       let style = {};
       userName !== message.sender ? style = msgStyleInbox : style = msgStyle;
+
       return (
         <div style={style} key={message.key}>
-          <div style={wrapperStyle}>
-            <div style=
-              {{
-                fontWeight: 'bold',
-                borderBottom: '1px solid gray',
-                paddingBottom: '5px',
-                fontFamily: 'Rubik',
-              }}>
+          <div className="msg-wrapper" >
+            <div className="msg-sender">
               {message.sender}
             </div>
-            <p style=
-              {{
-                paddingTop: '10px',
-                fontFamily: 'Rubik',
-              }} >
+            <p className="msg-message">
               {message.message}
             </p>
-            <span style=
-              {{
-                color: 'gray',
-                paddingTop: '10px',
-                fontSize: '10px'
-              }}>
+            <span className="msg-time">
               {message.time}
             </span>
           </div>
-        </div>);
+        </div>
+      );
     }
     );
   }
 
   render() {
-
     return (
       <div className='testing'>
         <ReactCSSTransitionGroup
@@ -101,7 +90,6 @@ class MessageBox extends Component {
           {this.renderMessages()}
         </ReactCSSTransitionGroup>
       </div>
-
     );
   }
 }

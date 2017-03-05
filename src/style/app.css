@@ -1,0 +1,19 @@
+.app-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 600px;
+  width: 600px;
+  border: 1px solid darkgray;
+  border-radius: 2px;
+  background: white;
+  position: relative;
+  box-sizing: border-box;
+}
+
+@media only screen and (max-width: 1000px) {
+  .app-wrap {
+    height: 100%;
+    width: 100%;
+  }
+}

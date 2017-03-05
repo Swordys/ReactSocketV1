@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import socket from '../constants/clientSocket';
+/* eslint-disable no-unused-vars */
 import awesome from '../style/fontAwesome/css/font-awesome.min.css';
 
 class HeaderControls extends Component {
@@ -18,11 +19,16 @@ class HeaderControls extends Component {
         userCount: users.length,
       });
     });
+    socket.on('disconnect', () => {
+      this.setState(prev => ({
+        userCount: prev.userCount - 1,
+      }));
+    });
   }
 
   render() {
     const HeaderStyle = {
-      height: '50px',
+      height: '5vh',
       width: '100%',
       borderBottom: '1px solid darkgray',
       display: 'flex',
