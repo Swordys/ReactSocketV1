@@ -4,10 +4,10 @@ import {
 } from 'redux';
 import {
   connectNicknameReducer,
-  sendGlobalMessageReducer,
+  loggedState,
 } from './Reducers.jsx';
 
 export default combineReducers({
   userName: connectNicknameReducer,
-  lastMessage: sendGlobalMessageReducer,
+  loggedState,
 });

@@ -12,13 +12,7 @@ export const connectNickname = (name) => (dispatch) => {
   dispatch(connectNicknameSuccess(name));
 };
 
-
-const sendGlobalMessageSuccess = (message) => ({
-  type: 'GET_GLOBALMESSAGE_SUCCESS',
-  message
-});
-
-export const sendGlobalMessage = (message) => (dispatch) => {
+export const sendGlobalMessage = (message) => () => {
   const messageObj = {
     message: message.msg,
     key: uuid(),
@@ -26,5 +20,18 @@ export const sendGlobalMessage = (message) => (dispatch) => {
     time: moment().format("HH:mm A"),
   };
   socket.emit('chat message', messageObj);
-  dispatch(sendGlobalMessageSuccess(messageObj));
+};
+
+export const changeLoginStatus = (status) => dispatch => {
+  if (status) {
+    dispatch({
+      type: 'LOGGED_IN',
+      check: status
+    });
+  } else {
+    dispatch({
+      type: 'LOGGED_OUT',
+      check: status,
+    });
+  }
 };

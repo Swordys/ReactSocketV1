@@ -1,8 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import styles from '../style/reactTrans.css';
 import socket from '../constants/clientSocket';
+
+/*eslint-disable no-unused-vars*/
+import styles from '../style/reactTrans.css';
+/*eslint-enable no-unused-vars*/
+
 
 class MessageBox extends Component {
   constructor(props) {
@@ -80,7 +84,7 @@ class MessageBox extends Component {
 
   render() {
     return (
-      <div className='testing'>
+      <div className="messageBox-wrap">
         <ReactCSSTransitionGroup
           transitionName="msg-anim"
           component="div"

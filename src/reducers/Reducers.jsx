@@ -7,11 +7,14 @@ export const connectNicknameReducer = (state = '', action) => {
   }
 };
 
-export const sendGlobalMessageReducer = (state = [], action) => {
+
+export const loggedState = (state = true, action) => {
   switch (action.type) {
-    case 'GET_GLOBALMESSAGE_SUCCESS':
-      return [...state, action.message];
+    case 'LOGGED_IN':
+      return action.check;
+    case 'LOGGED_OUT':
+      return action.check;
     default:
-      return state;
+      return false;
   }
 };

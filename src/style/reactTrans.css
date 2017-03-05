@@ -7,7 +7,7 @@
   padding: 0 15px 15px 15px;
 }
 
-.testing {
+.messageBox-wrap {
   height: 100%;
   overflow-y: auto;
   display: flex;
