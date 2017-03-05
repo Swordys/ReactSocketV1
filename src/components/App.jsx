@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import RoomModal from './RoomModal.jsx';
 import LoginModal from './LoginModal.jsx';
 import MessageBox from './MessageBox.jsx';
 import Input from './Input.jsx';
@@ -14,6 +15,7 @@ class App extends Component {
   render() {
     return (
       <div className="app-wrap">
+        <RoomModal />
         <LoginModal />
         <HeaderControls />
         <ConnectedMessage />

@@ -21,7 +21,6 @@ class LoginModal extends Component {
   }
 
   render() {
-
     let Unchangable = false;
     const { loggedState } = this.props;
     const nickNameStyle = {
