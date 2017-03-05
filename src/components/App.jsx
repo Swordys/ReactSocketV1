@@ -37,11 +37,11 @@ class App extends Component {
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'flex-end',
-      height: '500px',
-      width: '500px',
+      height: '600px',
+      width: '600px',
       border: '1px solid darkgray',
       borderRadius: '2px',
-      background: '#f9f9f9',
+      background: 'white',
       position: 'relative',
     };
 

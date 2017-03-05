@@ -17,14 +17,12 @@ class ConnectedMessage extends Component {
     socket.on(`user connected`, user => {
       this.setState({
         lastConnected: user,
+        toggle: !this.state.toggle
       });
     });
   }
 
   render() {
-    (() => this.setState({
-      toggle: !this.state.toggle
-    }))();
     const toggle = this.state.toggle;
 
     const MessageStyle = {

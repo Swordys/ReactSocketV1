@@ -1,4 +1,4 @@
-import io from 'socket.io-client';
+import moment from 'moment';
 import uuid from 'uuid';
 import socket from '../constants/clientSocket';
 
@@ -24,6 +24,7 @@ export const sendGlobalMessage = (message) => (dispatch) => {
     message: message.msg,
     key: uuid(),
     sender: message.sender,
+    time: moment().format("HH:mm A"),
   };
   socket.emit('chat message', messageObj);
   dispatch(sendGlobalMessageSuccess(messageObj));

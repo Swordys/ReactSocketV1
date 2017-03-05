@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import styles from '../style/reactTrans.css';
 import socket from '../constants/clientSocket';
 
 class MessageBox extends Component {
@@ -20,52 +22,93 @@ class MessageBox extends Component {
 
   renderMessages() {
     const msgStyle = {
-      background: '#eee',
+      background: '#f6f6f6',
       fontFamily: 'arial',
       fontSize: '14px',
-      borderTop: '1px solid darkgray',
+      border: '1px solid darkgray',
       overflow: 'hidden',
       flexShrink: '0',
+      borderRadius: '3px',
+      marginTop: '15px',
     };
+
+    const msgStyleInbox = {
+      background: '#f6f6f6',
+      fontFamily: 'arial',
+      fontSize: '14px',
+      border: '1px solid darkgray',
+      overflow: 'hidden',
+      flexShrink: '0',
+      borderRadius: '3px',
+      marginTop: '15px',
+      alignSelf: 'flex-start',
+    };
+
     const wrapperStyle = {
       display: 'flex',
       flexDirection: 'column',
-      padding: '10px',
+      padding: '7px',
     };
-    const {globalMessages} = this.state;
-    return globalMessages.map(message => <div style={msgStyle} key={message.key}>
-      <div style={wrapperStyle}>
-        <div style={{ fontWeight: 'bold', borderBottom: '1px solid gray', paddingBottom: '5px' }}>{message.sender}</div>
-        <p style={{ paddingTop: '10px' }} >
-          {message.message}
-        </p>
-      </div>
-    </div>);
+    const { globalMessages } = this.state;
+    const { userName } = this.props;
+
+    return globalMessages.map(function (message) {
+      let style = {};
+      userName !== message.sender ? style = msgStyleInbox : style = msgStyle;
+      return (
+        <div style={style} key={message.key}>
+          <div style={wrapperStyle}>
+            <div style=
+              {{
+                fontWeight: 'bold',
+                borderBottom: '1px solid gray',
+                paddingBottom: '5px'
+              }}>
+              {message.sender}
+            </div>
+            <p style=
+              {{
+                paddingTop: '10px'
+              }} >
+              {message.message}
+            </p>
+            <span style=
+              {{
+                color: 'gray',
+                paddingTop: '10px',
+                fontSize: '10px'
+              }}>
+              {message.time}
+            </span>
+          </div>
+        </div>);
+    }
+    );
   }
 
   render() {
-    const MessageBoxStyle = {
-      width: '100%',
-      background: 'white',
-      display: 'flex',
-      flexDirection: 'column',
-      overflowY: 'auto',
-    };
 
     return (
-      <div className="msg-wrap" style={MessageBoxStyle} >
+      <ReactCSSTransitionGroup
+        transitionName="msg-anim"
+        component="div"
+        className="trans-wrap"
+        transitionEnterTimeout={300}
+        transitionLeaveTimeout={300}>
         {this.renderMessages()}
-      </div>
+      </ReactCSSTransitionGroup>
     );
   }
 }
 
 MessageBox.propTypes = {
   messageLog: PropTypes.array,
+  userName: PropTypes.string,
 };
 
 const mapStateToProps = state => ({
   globalMessages: state.lastMessage,
+  userName: state.userName,
 });
 
 export default connect(mapStateToProps)(MessageBox);

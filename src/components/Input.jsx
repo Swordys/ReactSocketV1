@@ -18,7 +18,7 @@ class Input extends Component {
     }
 
     // auto scroll to bottom
-    const msgWrap = document.querySelector('.msg-wrap');
+    const msgWrap = document.querySelector('.trans-wrap');
     const isScrolled = msgWrap.scrollHeight - msgWrap.clientHeight <= msgWrap.scrollTop + 1;
     if (!isScrolled) {
       msgWrap.scrollTop = msgWrap.scrollHeight - msgWrap.clientHeight;
@@ -43,6 +43,10 @@ class Input extends Component {
   }
 }
 
+Input.propTypes = {
+  sendGlobal: PropTypes.func.isRequired,
+  userName: PropTypes.string,
+};
 
 const mapStateToProps = state => ({
   userName: state.userName,
