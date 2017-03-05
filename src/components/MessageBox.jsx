@@ -47,7 +47,7 @@ class MessageBox extends Component {
     const wrapperStyle = {
       display: 'flex',
       flexDirection: 'column',
-      padding: '7px',
+      padding: '10px',
     };
     const { globalMessages } = this.state;
     const { userName } = this.props;
@@ -62,13 +62,15 @@ class MessageBox extends Component {
               {{
                 fontWeight: 'bold',
                 borderBottom: '1px solid gray',
-                paddingBottom: '5px'
+                paddingBottom: '5px',
+                fontFamily: 'Rubik',
               }}>
               {message.sender}
             </div>
             <p style=
               {{
-                paddingTop: '10px'
+                paddingTop: '10px',
+                fontFamily: 'Rubik',
               }} >
               {message.message}
             </p>
@@ -89,14 +91,17 @@ class MessageBox extends Component {
   render() {
 
     return (
-      <ReactCSSTransitionGroup
-        transitionName="msg-anim"
-        component="div"
-        className="trans-wrap"
-        transitionEnterTimeout={300}
-        transitionLeaveTimeout={300}>
-        {this.renderMessages()}
-      </ReactCSSTransitionGroup>
+      <div className='testing'>
+        <ReactCSSTransitionGroup
+          transitionName="msg-anim"
+          component="div"
+          className="trans-wrap"
+          transitionEnterTimeout={300}
+          transitionLeaveTimeout={300}>
+          {this.renderMessages()}
+        </ReactCSSTransitionGroup>
+      </div>
+
     );
   }
 }

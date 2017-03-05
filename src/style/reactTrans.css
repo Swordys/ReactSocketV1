@@ -3,7 +3,16 @@
   flex-direction: column;
   align-items: flex-end;
   overflow-y: auto;
+  position: relative;
   padding: 0 15px 15px 15px;
+}
+
+.testing{
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
 .msg-anim-enter {

@@ -7,7 +7,6 @@ export const connectNicknameReducer = (state = '', action) => {
   }
 };
 
-
 export const sendGlobalMessageReducer = (state = [], action) => {
   switch (action.type) {
     case 'GET_GLOBALMESSAGE_SUCCESS':

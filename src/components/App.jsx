@@ -4,6 +4,7 @@ import { connectNickname } from '../actions/Actions.jsx';
 import MessageBox from './MessageBox.jsx';
 import Input from './Input.jsx';
 import ConnectedMessage from './ConnectedMessage.jsx';
+import HeaderControls from './HeaderControls.jsx';
 
 
 class App extends Component {
@@ -75,19 +76,25 @@ class App extends Component {
         <div style={nickNameStyle}>
           <form
             onSubmit={this.NicknameInput}
-            style={{
-              width: '200px',
+            style=
+            {{
+              width: '250px',
               overflow: 'hidden',
               display: 'flex',
               alignItems: 'center',
               flexDirection: 'column'
             }}>
             <h2
-              style={{
+              style=
+              {{
                 padding: '20px',
                 color: 'white',
-                fontFamily: 'arial'
-              }} >nickname ?</h2>
+                fontFamily: 'ThickFont',
+                letterSpacing: '2px',
+                fontSize: '36px'
+              }} >
+              nickname ?
+              </h2>
             <input
               readOnly={Unchangable}
               style={{
@@ -95,13 +102,15 @@ class App extends Component {
                 border: 'none',
                 borderBottom: '1px solid white',
                 color: 'white',
-                fontSize: '24px',
+                fontSize: '28px',
                 textAlign: 'center',
+                fontFamily: 'ThickFont',
                 maxWidth: '200px',
               }}
               type="text" />
           </form>
         </div>
+        <HeaderControls />
         <ConnectedMessage />
         <MessageBox />
         <Input />

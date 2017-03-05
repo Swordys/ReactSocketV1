@@ -33,7 +33,7 @@ class ConnectedMessage extends Component {
       justifyContent: 'center',
       alignItems: 'center',
       position: 'absolute',
-      top: 0,
+      top: 50,
       right: 0,
       opacity: 0,
     };

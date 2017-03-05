@@ -13,7 +13,6 @@ export const connectNickname = (name) => (dispatch) => {
 };
 
 
-
 const sendGlobalMessageSuccess = (message) => ({
   type: 'GET_GLOBALMESSAGE_SUCCESS',
   message

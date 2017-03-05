@@ -4,6 +4,11 @@
   outline: none;
 }
 
+@font-face {
+  font-family: 'ThickFont';
+  src: url(coolvetica.ttf);
+}
+
 body,
 html {
   height: 100%;
