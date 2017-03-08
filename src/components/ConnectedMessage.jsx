@@ -57,4 +57,5 @@ ConnectedMessage.propTypes = {
   lastConnceted: PropTypes.string,
 };
 
+
 export default ConnectedMessage;

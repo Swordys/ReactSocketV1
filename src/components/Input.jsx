@@ -10,8 +10,8 @@ class Input extends Component {
 
   submitMeesage(e) {
     e.preventDefault();
-    const { sendGlobal, userName } = this.props;
-    const message = { msg: e.target.firstChild.value, sender: userName };
+    const { sendGlobal, userName, connectedRoom } = this.props;
+    const message = { msg: e.target.firstChild.value, sender: userName, room: connectedRoom };
     if (message.msg.length > 0) {
       e.target.firstChild.value = '';
       sendGlobal(message);
@@ -39,10 +39,12 @@ class Input extends Component {
 Input.propTypes = {
   sendGlobal: PropTypes.func.isRequired,
   userName: PropTypes.string,
+  connectedRoom: PropTypes.string,
 };
 
 const mapStateToProps = state => ({
   userName: state.userName,
+  connectedRoom: state.connectedRoom,
 });
 
 const mapDispatchToProps = dispatch => ({

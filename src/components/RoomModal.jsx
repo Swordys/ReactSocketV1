@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { connectToRoom } from '../actions/Actions.jsx';
+import socket from '../constants/clientSocket';
 
 class RoomModal extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -12,13 +14,17 @@ class RoomModal extends Component {
 
   roomSubmit(e) {
     e.preventDefault();
+    const { connectRoom } = this.props;
     const room = e.target.lastChild.value;
     if (room.length > 0) {
       e.target.lastChild.value = '';
       this.setState({
         room,
       });
-      console.log(room);
+      connectRoom(room);
+
+      socket.emit('create room', room);
+      socket.emit('connected users', room);
     }
   }
 
@@ -90,4 +96,10 @@ class RoomModal extends Component {
   }
 }
 
-export default RoomModal;
+const mapDispatchToProps = dispatch => ({
+  connectRoom: (room) => {
+    dispatch(connectToRoom(room));
+  }
+});
+
+export default connect(null, mapDispatchToProps)(RoomModal);

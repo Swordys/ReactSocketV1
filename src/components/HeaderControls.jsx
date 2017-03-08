@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import socket from '../constants/clientSocket';
 /* eslint-disable no-unused-vars */
 import awesome from '../style/fontAwesome/css/font-awesome.min.css';
 
 class HeaderControls extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -13,16 +13,14 @@ class HeaderControls extends Component {
   }
 
   componentDidMount() {
-    socket.emit('connected users');
     socket.on('connected users', users => {
       this.setState({
         userCount: users.length,
       });
     });
     socket.on('disconnect', () => {
-      this.setState(prev => ({
-        userCount: prev.userCount - 1,
-      }));
+      const { room } = this.props;
+      socket.emit('connected users', `${room}`);
     });
   }
 
@@ -57,4 +55,9 @@ class HeaderControls extends Component {
   }
 }
 
-export default HeaderControls;
+const mapStateToProps = state => ({
+  room: state.connectedRoom,
+});
+
+
+export default connect(mapStateToProps)(HeaderControls);

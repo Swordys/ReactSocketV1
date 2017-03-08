@@ -11,10 +11,14 @@ class LoginModal extends Component {
 
   NicknameInput(e) {
     e.preventDefault();
-    const { connectNickname, loginToRoom } = this.props;
+    const { connectNickname, loginToRoom, connectedRoom } = this.props;
     const nickname = e.target.lastChild.value;
     if (nickname.length > 0) {
-      connectNickname(nickname);
+      const userObj = {
+        nickname,
+        room: connectedRoom,
+      };
+      connectNickname(userObj);
       loginToRoom(true);
       e.target.lastChild.value = '';
     }
@@ -94,10 +98,12 @@ LoginModal.propTypes = {
   loggedState: PropTypes.bool.isRequired,
   connectNickname: PropTypes.func.isRequired,
   loginToRoom: PropTypes.func.isRequired,
+  connectedRoom: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
   loggedState: state.loggedState,
+  connectedRoom: state.connectedRoom,
 });
 
 const mapDispatchToProps = dispatch => ({
