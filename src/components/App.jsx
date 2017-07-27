@@ -1,15 +1,14 @@
-import React, { Component } from 'react';
-import RoomModal from './RoomModal.jsx';
-import LoginModal from './LoginModal.jsx';
-import MessageBox from './MessageBox.jsx';
-import Input from './Input.jsx';
-import ConnectedMessage from './ConnectedMessage.jsx';
-import HeaderControls from './HeaderControls.jsx';
+import React, { Component } from "react";
+import RoomModal from "./RoomModal.jsx";
+import LoginModal from "./LoginModal.jsx";
+import MessageBox from "./MessageBox.jsx";
+import Input from "./Input.jsx";
+import ConnectedMessage from "./ConnectedMessage.jsx";
+import HeaderControls from "./HeaderControls.jsx";
 
 /*eslint-disable no-unused-vars*/
-import styles from '../style/app.css';
+import styles from "../style/app.css";
 /*eslint-enable no-unused-vars*/
-
 
 class App extends Component {
   render() {
@@ -25,6 +24,5 @@ class App extends Component {
     );
   }
 }
-
 
 export default App;

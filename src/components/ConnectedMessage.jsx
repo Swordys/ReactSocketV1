@@ -1,15 +1,15 @@
-import React, { Component, PropTypes } from 'react';
-import socket from '../constants/clientSocket';
+import React, { Component, PropTypes } from "react";
+import socket from "../constants/clientSocket";
 /* eslint-disable no-unused-vars */
-import style from '../style/userConnected.css';
+import style from "../style/userConnected.css";
 /* eslint-enable no-unused-vars */
 
 class ConnectedMessage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      lastConnceted: '',
-      toggle: true,
+      lastConnceted: "",
+      toggle: true
     };
   }
 
@@ -26,36 +26,37 @@ class ConnectedMessage extends Component {
     const toggle = this.state.toggle;
 
     const MessageStyle = {
-      background: 'black',
-      color: 'white',
-      fontFamily: 'arial',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      position: 'absolute',
+      background: "black",
+      color: "white",
+      fontFamily: "arial",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      position: "absolute",
       top: 50,
       right: 0,
-      opacity: 0,
+      opacity: 0
     };
 
-    let flash = '';
+    let flash = "";
     if (toggle) {
-      flash = 'conncted-wrap';
+      flash = "conncted-wrap";
     } else {
-      flash = 'conncted-wrap2';
+      flash = "conncted-wrap2";
     }
 
     return (
       <div className={flash} style={MessageStyle}>
-        <span style={{ padding: '10px' }}>{this.state.lastConnected} connceted</span>
+        <span style={{ padding: "10px" }}>
+          {this.state.lastConnected} connceted
+        </span>
       </div>
     );
   }
 }
 
 ConnectedMessage.propTypes = {
-  lastConnceted: PropTypes.string,
+  lastConnceted: PropTypes.string
 };
-
 
 export default ConnectedMessage;
